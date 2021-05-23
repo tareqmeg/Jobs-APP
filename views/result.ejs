@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <a href="/">Home</a>
+                <a href="/search">Search</a>
+                <a href="/myjobs">Mylist</a>
+            </ul>
+        </nav>
+       
+    </header>
+<h1>results</h1>
+
+<section>
+    <% jobs.forEach((item)=>{ %>
+
+        <div>
+            <p><%= item.title %> </p>
+            <p><%= item.company %> </p>
+            <p><%= item.location %> </p>
+            <p><%= item.url %> </p>
+            <form action="/addtomylist" method="POST">
+                <input type="hidden" name="title" value="<%= item.title %> ">
+                <input type="hidden" name="company" value="<%= item.company %> ">
+                <input type="hidden" name="location" value="<%= item.location %> ">
+                <input type="hidden" name="url" value="<%= item.url %> ">
+                <input type="hidden" name="description" value="<%= item.description %> ">
+                <button type="submit">Add to my list</button>
+            </form>
+        </div>
+
+   <% }) %> 
+    
+</section>
+
+
+   
+</body>
+</html>
