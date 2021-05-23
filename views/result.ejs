@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
     <title>Document</title>
 </head>
 <body>
@@ -21,8 +23,8 @@
 
 <section>
     <% jobs.forEach((item)=>{ %>
-<div ></div>
-        <div >
+<div class="card">
+        <div class="container">
             <p><%= item.title %> </p>
             <p><%= item.company %> </p>
             <p><%= item.location %> </p>
@@ -36,7 +38,7 @@
                 <button type="submit">Add to my list</button>
             </form>
         </div>
-
+    </div>
    <% }) %> 
     
 </section>
