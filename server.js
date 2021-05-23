@@ -66,6 +66,17 @@ server.post('/addtomylist',(req,res)=>{
     })
 })
 
+server.get('/myjobs',(req,res)=>{
+    let SQL='SELECT * FROM jobs;';
+    client.query(SQL).then((result)=>{
+        let data = result.rows;
+        
+        
+            res.render('myjobs', {result:data});
+       
+    })
+})
+
 //(title, company, location, and url)
 function Job(data){
     // this.data= data;

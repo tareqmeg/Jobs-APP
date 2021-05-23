@@ -18,6 +18,15 @@
        
     </header>
 <h1>my jobs</h1>
-
+<% result.forEach(element => { %>
+    <div>
+        <p><%= element.title %> </p>
+        <p><%= element.company %> </p>
+        <p><%= element.clocation %> </p>
+        <p><%= element.curl %> </p>
+        
+    </div>
+ 
+<% }) %>
 </body>
 </html>
