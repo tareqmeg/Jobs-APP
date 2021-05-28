@@ -14,11 +14,12 @@ const methodOverride = require('method-override');
 const PORT = process.env.PORT || 3000;
 const server = express();
 server.use(cors());
+server.use('/public',express.static('public'));
 server.set('view engine', 'ejs');
 
 server.use(express.urlencoded({ extended: true }));
 server.use(methodOverride('_method'));
-server.use(express.static('./public'));
+
 
 const client = new pg.Client( { connectionString: process.env.DATABASE_URL, ssl: process.env.LOCALLY ? false : {rejectUnauthorized: false}} );
 
@@ -62,7 +63,16 @@ server.post('/addtomylist',(req,res)=>{
     client.query(SQL,saveValues).then((result)=>{
         let data = result.rows;
         console.log(data);
-        res.render('mylist',{insertedData:data[0]});
+        res.redirect(`/addtomylist/${data[0].id}`);
+    })
+})
+
+server.get('/addtomylist/:id', (req,res)=>{
+    let SQL = `SELECT * FROM jobs WHERE id=$1;`;
+    let safeValue = [req.params.id];
+    client.query(SQL,safeValue).then((result)=>{
+        res.render('jobdetail', {JobData:result.rows[0]});
+
     })
 })
 
@@ -70,10 +80,32 @@ server.get('/myjobs',(req,res)=>{
     let SQL='SELECT * FROM jobs;';
     client.query(SQL).then((result)=>{
         let data = result.rows;
-        
-        
+        console.log(data);
+        if (data === []){
+            res.render('nulljobs');
+        }else{
             res.render('myjobs', {result:data});
+        }
+            
        
+    })
+})
+
+server.delete('/delet/:id', (req,res)=>{
+    let SQL = `DELETE FROM jobs WHERE id=$1;`;
+    let id = req.params.id;
+    let safeValue=[id];
+    client.query(SQL,safeValue).then(()=>{
+        res.redirect('/myjobs');
+    })
+})
+server.put('/update/:id', (req,res)=>{
+    const {title, company, clocation, curl, cdescription} = req.body;
+    let id = req.params.id;
+    let SQL = 'UPDATE jobs SET title = $1, company=$2, clocation=$3, curl=$4, cdescription=$5 WHERE id=$6;';
+    let saveValues= [title, company, clocation, curl, cdescription, id];
+    client.query(SQL,saveValues).then(()=>{
+        res.redirect(`/addtomylist/${id}`);
     })
 })
 

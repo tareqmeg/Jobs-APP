@@ -46,6 +46,7 @@
       text-align: center;
   }
     </style>
+
 </head>
 <body>
     <header>
@@ -58,22 +59,17 @@
         </nav>
        
     </header>
-<h1>ALL USA Jobs</h1>
-
-    <section class="grid-container">
-        <% jobs.forEach((item)=>{ %>
-            <div class="card">
-            <div class="container">
-                <h2> Job Title: <%= item.title %> </h2>
-                <p>Company Name: <%= item.company %> </p>
-                <p>Company Location: <%= item.location %> </p>
-                <p>Job URL: <%= item.url %> </p>
-            </div>
-
-        </div>
-
-       <% }) %> 
+<h1>my jobs</h1>
+<section class="grid-container">
+<% result.forEach(element => { %>
+    <div class="card">
+      <div class="container">
+      <h2>Data Base Contain no Jobs</h2>
         
-    </section>
+      </div>
+    </div>
+ 
+<% }) %>
+</section>
 </body>
 </html>

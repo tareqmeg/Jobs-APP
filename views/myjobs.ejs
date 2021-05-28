@@ -4,7 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
+    <style>
+        .grid-container {
+  display: grid;
+  grid-template-columns: auto auto ;
+  background-color: #afd1ec;
+  padding: 10px;
+}
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+  }
+  header{
+            background-color: rgb(160, 247, 164);
+            height: 100px;
+            line-height: 100px;
+        }
+  header nav ul a {
+      padding:  5px;
+      text-decoration: none;
+      
+  }
+  header nav ul a:hover {
+      color: blue;
+      
+  }
+  h1{
+      text-align: center;
+  }
+    </style>
+
 </head>
 <body>
     <header>
@@ -18,15 +60,22 @@
        
     </header>
 <h1>my jobs</h1>
+<section class="grid-container">
 <% result.forEach(element => { %>
-    <div>
-        <p><%= element.title %> </p>
-        <p><%= element.company %> </p>
-        <p><%= element.clocation %> </p>
-        <p><%= element.curl %> </p>
+    <div class="card">
+      <div class="container">
+        <h2> Job Title: <%= element.title %> </h2>
+        <p>Company Name: <%= element.company %> </p>
+        <p>Company Location: <%= element.clocation %> </p>
+        <p>Job URL: <%= element.curl %> </p>
+        <form action="/addtomylist/<%= element.id %>">
+        <button type="submit"> View Details </button>
+        </form>
         
+      </div>
     </div>
  
 <% }) %>
+</section>
 </body>
 </html>

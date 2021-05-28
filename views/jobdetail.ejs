@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         header{
+            background-color: rgb(160, 247, 164);
+            height: 100px;
+            line-height: 100px;
+        }
+  header nav ul a {
+      padding:  5px;
+      text-decoration: none;
+      
+  }
+  header nav ul a:hover {
+      color: blue;
+      
+  }
+  h1{
+      text-align: center;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <a href="/">Home</a>
+                <a href="/search">Search</a>
+                <a href="/myjobs">Mylist</a>
+            </ul>
+        </nav>
+       
+    </header>
+<main>
+<div>
+    <h2><%= JobData.title %> </h2>
+    <p><%= JobData.company %> </p>
+    <p><%= JobData.clocation %> </p>
+    <p><%= JobData.curl %> </p>
+    <p><%= JobData.cdescription %> </p>
+    <form action="/delet/<%= JobData.id %>?_method=delete" method="POST">
+    <button type="submit">Delet Job</button>
+    </form>
+    <button id="updateButton">Update Job</button>
+    <form action="/update/<%= JobData.id %>?_method=put" id="ubdateForm" method="POST">
+        <input type="text" name="title" value="<%=JobData.title%> "><br>
+        <input type="text" name="company" value="<%=JobData.company%> "><br>
+        <input type="text" name="clocation" value="<%=JobData.clocation%> "><br>
+        <input type="text" name="curl" value="<%=JobData.curl  %>"><br>
+        <textarea type="text" name="cdescription" cols="40" rows="15" ><%=JobData.cdescription%></textarea><br>
+        <button type="submit">Update Job</button>
+    </form>
+
+
+</div>
+
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script >
+    $('#ubdateForm').hide();
+    $('#updateButton').on('click',function(){
+    $('#ubdateForm').toggle();
+    });
+</script>
+</body>
+
+</html>
