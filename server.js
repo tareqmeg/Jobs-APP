@@ -33,10 +33,8 @@ server.get('/', (req,res)=>{
         
         res.render('index', {jobs:jobArr});
     });
-    
-    // res.render('index');
-
 })
+
 server.get('/search', (req,res)=>{
     res.render('searchPage');
 })
@@ -72,7 +70,6 @@ server.get('/addtomylist/:id', (req,res)=>{
     let safeValue = [req.params.id];
     client.query(SQL,safeValue).then((result)=>{
         res.render('jobdetail', {JobData:result.rows[0]});
-
     })
 })
 
@@ -80,9 +77,9 @@ server.get('/myjobs',(req,res)=>{
     let SQL='SELECT * FROM jobs;';
     client.query(SQL).then((result)=>{
         let data = result.rows;
-        console.log(data);
         if (data === []){
-            res.render('nulljobs');
+            let x = 'data base is empty';
+            res.render('nulljobs', {result: x});
         }else{
             res.render('myjobs', {result:data});
         }
